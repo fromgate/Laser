@@ -1,0 +1,11 @@
+name: Laser
+main: me.fromgate.laser.Laser
+version: 0.1.1
+author: fromgate, fromgate@gmail.com
+depend: [PlayEffect]
+commands:
+   laser:
+      aliases: [lsr]
+      description:
+      usage:
+           /laser help
