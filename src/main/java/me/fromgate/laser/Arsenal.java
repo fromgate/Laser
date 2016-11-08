@@ -22,7 +22,11 @@
 
 package me.fromgate.laser;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -63,12 +67,12 @@ public class Arsenal {
     public static void createFirstGun() {
         try {
             YamlConfiguration cfg = new YamlConfiguration();
-            File f = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
-            f.createNewFile();
+            File file = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
+            file.createNewFile();
             LaserGun gun = new LaserGun("LaserGun", "&4Laser_Gun$BLAZE_ROD");
             guns.put("lasergun", gun);
             saveLaserGun("lasergun", gun, cfg);
-            cfg.save(f);
+            cfg.save(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,10 +97,10 @@ public class Arsenal {
                     guns.put(key, gun);
                 }
                 if (guns.size() > 0) {
-                    File f = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
-                    if (f.exists()) f.delete();
-                    f.createNewFile();
-                    cfg.save(f);
+                    File file = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
+                    if (file.exists()) file.delete();
+                    file.createNewFile();
+                    cfg.save(file);
                 }
             }
         } catch (Exception e) {
@@ -107,8 +111,8 @@ public class Arsenal {
     public static void loadGuns() {
         try {
             YamlConfiguration cfg = new YamlConfiguration();
-            File f = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
-            cfg.load(f);
+            File file = new File(Laser.instance.getDataFolder() + File.separator + "arsenal.yml");
+            cfg.load(file);
             for (String key : cfg.getKeys(false)) {
                 LaserGun gun = new LaserGun(key, cfg);
                 guns.put(key, gun);
