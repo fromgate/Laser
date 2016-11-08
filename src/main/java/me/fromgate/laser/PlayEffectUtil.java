@@ -22,33 +22,32 @@
 
 package me.fromgate.laser;
 
-import java.util.Map;
-
 import me.fromgate.playeffect.Effects;
 import me.fromgate.playeffect.PlayEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
-import org.bukkit.plugin.Plugin;
+
+import java.util.Map;
 
 public class PlayEffectUtil {
     private static boolean isConnected = false;
 
-    public static void init(){
+    public static void init() {
         isConnected = checkPlayEffect();
     }
 
-    public static void playEffect(Location loc, String param){
-        if (isConnected){
-            Map<String,String> params = Effects.parseParams(param);
+    public static void playEffect(Location loc, String param) {
+        if (isConnected) {
+            Map<String, String> params = Effects.parseParams(param);
             String effect = Effects.getParam(params, "effect", "FLAME");
-            PlayEffect.play(effect,loc.add(0.5, 0.5, 0.5),params);
+            PlayEffect.play(effect, loc.add(0.5, 0.5, 0.5), params);
         } else {
             loc.getWorld().playEffect(loc, Effect.MOBSPAWNER_FLAMES, 0);
         }
     }
 
-    private static boolean checkPlayEffect(){
+    private static boolean checkPlayEffect() {
         return (Bukkit.getServer().getPluginManager().getPlugin("PlayEffect") != null);
     }
 }

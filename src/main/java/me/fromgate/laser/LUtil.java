@@ -25,20 +25,20 @@ package me.fromgate.laser;
 public class LUtil extends FGUtilCore {
 
     public LUtil(Laser plg, boolean savelng, String lng, String plgcmd) {
-        super(plg, savelng, lng, plgcmd,"laser");
+        super(plg, savelng, lng, plgcmd, "laser");
         initMessages();
         initCmd();
         if (savelng) this.SaveMSG();
     }
 
     private void initCmd() {
-        addCmd("help", "config", "hlp_thishelp","&3/laser help",'b',true);
-        addCmd("list", "list", "hlp_list","&3/laser list",'b',true);
-        addCmd("give", "give", "hlp_list","&3/laser give <laser type> [ammo [amount]]",'b');
-        addCmd("reload", "config", "hlp_reload","&3/laser reload",'b',true);
+        addCmd("help", "config", "hlp_thishelp", "&3/laser help", 'b', true);
+        addCmd("list", "list", "hlp_list", "&3/laser list", 'b', true);
+        addCmd("give", "give", "hlp_list", "&3/laser give <laser type> [ammo [amount]]", 'b');
+        addCmd("reload", "config", "hlp_reload", "&3/laser reload", 'b', true);
     }
 
-    private void initMessages(){
+    private void initMessages() {
         addMSG("msg_gunslist", "Laser guns:");
         addMSG("msg_nogunreload", "No laser guns found");
         addMSG("msg_gunsreloaded", "Laser guns loaded: %1%");

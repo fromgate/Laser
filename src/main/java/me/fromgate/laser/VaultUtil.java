@@ -22,12 +22,11 @@
 
 package me.fromgate.laser;
 
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class VaultUtil {
     private static boolean vault_perm = false;
@@ -35,28 +34,28 @@ public class VaultUtil {
     private static Permission permission = null;
     private static Economy economy = null;
 
-    public static String formatMoney(String value){
+    public static String formatMoney(String value) {
         if (!isEconomyConected()) return value;
         return economy.format(Double.parseDouble(value)); // Integer???
     }
 
     public static void init() {
-        if (checkVault()){
+        if (checkVault()) {
             vault_perm = setupPermissions();
             vault_eco = setupEconomy();
         }
     }
 
-    public static boolean isEconomyConected(){
+    public static boolean isEconomyConected() {
         return vault_eco;
     }
 
-    public static boolean isPermissionConected(){
+    public static boolean isPermissionConected() {
         return vault_perm;
     }
 
 
-    private static boolean setupPermissions(){
+    private static boolean setupPermissions() {
         RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
         if (permissionProvider != null) {
             permission = permissionProvider.getProvider();
@@ -64,7 +63,7 @@ public class VaultUtil {
         return (permission != null);
     }
 
-    private static boolean setupEconomy(){
+    private static boolean setupEconomy() {
         RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
         if (economyProvider != null) {
             economy = economyProvider.getProvider();
@@ -73,27 +72,27 @@ public class VaultUtil {
     }
 
 
-    public static double getBalance(String account){
+    public static double getBalance(String account) {
         if (!isEconomyConected()) return 0;
         return economy.getBalance(account);
     }
 
-    public static boolean hasMoney(String account, double amount){
+    public static boolean hasMoney(String account, double amount) {
         if (!isEconomyConected()) return false;
-        return economy.getBalance(account)>=amount;
+        return economy.getBalance(account) >= amount;
     }
 
-    public static void withdrawPlayer(String account, double amount){
+    public static void withdrawPlayer(String account, double amount) {
         if (!isEconomyConected()) return;
         economy.withdrawPlayer(account, amount);
     }
 
-    public static void depositPlayer(String account, double amount){
+    public static void depositPlayer(String account, double amount) {
         if (!isEconomyConected()) return;
         economy.depositPlayer(account, amount);
     }
 
-    public static boolean playerAddGroup (Player p, String group){
+    public static boolean playerAddGroup(Player p, String group) {
         if (!isPermissionConected()) return false;
         return permission.playerAddGroup(p, group);
     }
@@ -108,7 +107,7 @@ public class VaultUtil {
         return permission.playerRemoveGroup(p, group);
     }
 
-    private static boolean checkVault(){
+    private static boolean checkVault() {
         return (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null);
     }
 }

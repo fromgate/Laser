@@ -23,10 +23,10 @@
 
 package me.fromgate.laser;
 
-import java.io.IOException;
-
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
+
+import java.io.IOException;
 
 
 public class Laser extends JavaPlugin {
@@ -40,23 +40,23 @@ public class Laser extends JavaPlugin {
     boolean check_updates = true;
 
 
-    public void reloadCfg(){
+    public void reloadCfg() {
         reloadConfig();
-        language = getConfig().getString("general.language","english");
-        language_save = getConfig().getBoolean("general.language-save",false);
-        check_updates = getConfig().getBoolean("general.version-check",true);
-        getConfig().set("general.language",language);
-        getConfig().set("general.language-save",language_save);
-        getConfig().set("general.version-check",check_updates);
+        language = getConfig().getString("general.language", "english");
+        language_save = getConfig().getBoolean("general.language-save", false);
+        check_updates = getConfig().getBoolean("general.version-check", true);
+        getConfig().set("general.language", language);
+        getConfig().set("general.language-save", language_save);
+        getConfig().set("general.version-check", check_updates);
         saveConfig();
     }
 
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         reloadCfg();
         instance = this;
-        u = new LUtil(this, language_save, language,"laser");
+        u = new LUtil(this, language_save, language, "laser");
         u.initUpdateChecker("Laser", "68494", "laser", check_updates);
         l = new LaserListener();
         cmd = new Cmd();
@@ -73,7 +73,6 @@ public class Laser extends JavaPlugin {
         } catch (IOException e) {
         }
     }
-
 
 
 }
