@@ -24,7 +24,6 @@
 package me.fromgate.laser;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.MetricsLite;
 
 import java.io.IOException;
 
