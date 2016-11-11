@@ -24,11 +24,7 @@ package me.fromgate.laser;
 
 import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableMap;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -188,7 +184,7 @@ public class Arsenal {
     }
 
     public static LaserGun getGunByItem(ItemStack item) {
-        if (item != null){
+        if (item != null) {
             for (String key : guns.keySet()) {
                 LaserGun gun = guns.get(key);
                 if (gun.isLaserGun(item)) return gun;
@@ -204,7 +200,7 @@ public class Arsenal {
     }
 
     public static boolean damageEntity(Player damager, LivingEntity e, double damage) {
-        EntityDamageByEntityEvent event = new EntityDamageByEntityEvent (damager, e, DamageCause.ENTITY_ATTACK,
+        EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(damager, e, DamageCause.ENTITY_ATTACK,
                 new EnumMap(ImmutableMap.of(EntityDamageEvent.DamageModifier.BASE, Double.valueOf(damage))),
                 new EnumMap(ImmutableMap.of(EntityDamageEvent.DamageModifier.BASE,
                         Functions.constant(Double.valueOf(-0.0D)))));
