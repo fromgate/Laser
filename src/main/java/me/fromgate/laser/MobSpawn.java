@@ -224,7 +224,7 @@ public class MobSpawn {
         }
         if (!weapon.isEmpty()) {
             ItemStack item = getRndItem(weapon);
-            if (item != null) e.getEquipment().setItemInHand(item);
+            if (item != null) e.getEquipment().setItemInMainHand(item);
         }
     }
 

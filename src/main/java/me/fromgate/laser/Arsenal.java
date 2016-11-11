@@ -22,6 +22,8 @@
 
 package me.fromgate.laser;
 
+import com.google.common.base.Functions;
+import com.google.common.collect.ImmutableMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -36,6 +38,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -185,9 +188,11 @@ public class Arsenal {
     }
 
     public static LaserGun getGunByItem(ItemStack item) {
-        for (String key : guns.keySet()) {
-            LaserGun gun = guns.get(key);
-            if (gun.isLaserGun(item)) return gun;
+        if (item != null){
+            for (String key : guns.keySet()) {
+                LaserGun gun = guns.get(key);
+                if (gun.isLaserGun(item)) return gun;
+            }
         }
         return null;
     }
@@ -199,14 +204,16 @@ public class Arsenal {
     }
 
     public static boolean damageEntity(Player damager, LivingEntity e, double damage) {
-        EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(damager, e, DamageCause.ENTITY_ATTACK, Math.max(damage, 0));
+        EntityDamageByEntityEvent event = new EntityDamageByEntityEvent (damager, e, DamageCause.ENTITY_ATTACK,
+                new EnumMap(ImmutableMap.of(EntityDamageEvent.DamageModifier.BASE, Double.valueOf(damage))),
+                new EnumMap(ImmutableMap.of(EntityDamageEvent.DamageModifier.BASE,
+                        Functions.constant(Double.valueOf(-0.0D)))));
         Bukkit.getServer().getPluginManager().callEvent(event);
         if (!event.isCancelled()) e.damage(event.getDamage(), event.getDamager());
         return !event.isCancelled();
     }
 
     public static boolean breakBlock(Block b, Player p) {
-        //BlockState state = block.getState();
         BlockBreakEvent event = new BlockBreakEvent(b, p);
         Bukkit.getServer().getPluginManager().callEvent(event);
         return !event.isCancelled();

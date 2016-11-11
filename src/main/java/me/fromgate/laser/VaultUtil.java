@@ -72,21 +72,25 @@ public class VaultUtil {
     }
 
 
+    @SuppressWarnings("deprecation")
     public static double getBalance(String account) {
         if (!isEconomyConected()) return 0;
         return economy.getBalance(account);
     }
 
+    @SuppressWarnings("deprecation")
     public static boolean hasMoney(String account, double amount) {
         if (!isEconomyConected()) return false;
         return economy.getBalance(account) >= amount;
     }
 
+    @SuppressWarnings("deprecation")
     public static void withdrawPlayer(String account, double amount) {
         if (!isEconomyConected()) return;
         economy.withdrawPlayer(account, amount);
     }
 
+    @SuppressWarnings("deprecation")
     public static void depositPlayer(String account, double amount) {
         if (!isEconomyConected()) return;
         economy.depositPlayer(account, amount);

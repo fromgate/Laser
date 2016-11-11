@@ -54,14 +54,15 @@ public class LaserListener implements Listener {
     @EventHandler
     public void shootLaserGun(PlayerInteractEvent event) {
         if ((event.getAction() != Action.RIGHT_CLICK_AIR) && (event.getAction() != Action.RIGHT_CLICK_BLOCK)) return;
-        Player p = event.getPlayer();
-        if (p.getItemInHand() == null) return;
-        LaserGun gun = Arsenal.getGunByItem(p.getItemInHand());
+        Player player = event.getPlayer();
+        if (player.getInventory().getItemInMainHand() == null) return;
+
+        LaserGun gun = Arsenal.getGunByItem(player.getInventory().getItemInMainHand());
         if (gun == null) return;
         String guntype = Arsenal.getGunType(gun);
         if (guntype.isEmpty()) return;
-        if (p.hasPermission("laser.gun.all") || p.hasPermission("laser.gun." + guntype))
-            gun.shoot(p);
+        if (player.hasPermission("laser.gun.all") || player.hasPermission("laser.gun." + guntype))
+            gun.shoot(player);
     }
 
     @EventHandler
